@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Comic Reader</title>
+  <title>Mobi Reader</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobi.css') }}">
 
   <script src="{{ url_for('static', filename='js/mobi.js') }}"></script>
   <script>
@@ -27,14 +28,18 @@
                 const pagerLeft = document.querySelector('.pager-left');
                 clone.innerHTML = book.innerHTML;
                 let current = 0;
+                const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) -10;
                 pagerRight.addEventListener('click', () => {
-                    current += 737;
+                    current += vh;
                     clone.scrollTo(0, current);
                     clone.style.visibility = 'inherit';
                     book.style.visibility = 'hidden';
                 });
                 pagerLeft.addEventListener('click', () => {
-                    current -= 737;
+                    current -= vh;
+                    if (current < 0) {
+                        current = 0;
+                    }
                     clone.scrollTo(0, current);
                     clone.classList.toggle('invisible');
                     book.classList.toggle('invisible');
@@ -47,43 +52,6 @@
       }
     };
   </script>
-    <style type="text/css">
-    #container {
-        width: 560px;
-        height: 737px;
-        position: relative;
-        margin: 0 auto;
-    }
-    #book, #clone {
-        font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, SimSun, Heiti, sans-serif; line-height:150%;
-        white-space: pre-wrap;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        z-index: 1;
-    }
-    .invisible {
-        visibility: hidden;
-    }
-    .pager {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        width: 100px;
-        background-color: black;
-        z-index: 10;
-        opacity: .1;
-        cursor: pointer;
-    }
-    .pager-left {
-        left: 0;
-    }
-    .pager-right {
-        right: 0;
-    }
-</style>
 </head>
 <body>
 <div id="container">
