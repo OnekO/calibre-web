@@ -2161,6 +2161,15 @@ def read_book(book_id, book_format):
                 #    copyfile(cbr_file, tmp_file)
                 return render_title_template('readcbr.html', comicfile=all_name, title=_(u"Read a Book"),
                                              extension=fileext)
+        for fileext in ["mobi"]:
+            if book_format.lower() == fileext:
+                all_name = str(book_id) # + "/" + book.data[0].name + "." + fileext
+                #tmp_file = os.path.join(book_dir, book.data[0].name) + "." + fileext
+                #if not os.path.exists(all_name):
+                #    cbr_file = os.path.join(config.config_calibre_dir, book.path, book.data[0].name) + "." + fileext
+                #    copyfile(cbr_file, tmp_file)
+                return render_title_template('readmobi.html', comicfile=all_name, title=_(u"Read a Book"),
+                                             extension=fileext)
         '''if rar_support == True:
             extensionList = ["cbr","cbt","cbz"]
         else:
